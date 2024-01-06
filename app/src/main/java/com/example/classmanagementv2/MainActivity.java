@@ -17,5 +17,19 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.contentMainFragment, new BaseFragment())
                     .commit();
         }
+        GlobalVar.mainActivityContext = MainActivity.this;
+        initDataCart();
+        initDataOrdered();
     }
+    private void initDataCart() {
+        for (int i = 0; i < GlobalVar.cart.length; i++) {
+            GlobalVar.cart[i] = new DataProductLine("0", R.drawable.school_logo, "", 0, 0.0, 0.0, "");
+        }
+    }
+    private void initDataOrdered() {
+        for (int i = 0; i < GlobalVar.cart.length; i++) {
+            GlobalVar.Ordered[i] = new DataProductLine("0", R.drawable.school_logo, "", 0, 0.0, 0.0, "");
+        }
+    }
+
 }

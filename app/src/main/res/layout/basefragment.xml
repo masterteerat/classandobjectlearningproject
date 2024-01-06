@@ -18,25 +18,56 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btnadd"
+            <TextView
+                android:id="@+id/txtSid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
-                android:text="add"
+                android:layout_marginStart="16dp"
+                android:text="รหัสนักเรียน: 38439"
+                android:textSize="20dp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/imgschool"
+                app:layout_constraintTop_toBottomOf="@+id/txtName"
+                app:layout_constraintVertical_bias="0.1" />
 
-            <Button
-                android:id="@+id/btndel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="del"
+            <ImageView
+                android:id="@+id/imgschool"
+                android:layout_width="69dp"
+                android:layout_height="69dp"
+
+                android:cropToPadding="true"
+                android:padding="1dp"
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnadd"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/school_logo" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="ชื่อ: นาย ธีรัตม์ เเซ่ตั๊น"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgschool"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <ImageButton
+                android:id="@+id/imgBtnUpload"
+                android:layout_width="60dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_send" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

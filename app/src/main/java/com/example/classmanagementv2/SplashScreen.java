@@ -14,12 +14,21 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
+
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                startActivity(intent);
+                if(GlobalVar.userName == null){
+                    Intent intent = new Intent(SplashScreen.this, RegisterScreen.class);
+                    startActivity(intent);
+                } else{
+                    Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
         }, 2000);
     }
+
+
 }

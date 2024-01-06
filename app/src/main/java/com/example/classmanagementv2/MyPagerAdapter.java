@@ -23,6 +23,10 @@ public class MyPagerAdapter extends FragmentStateAdapter{
             case 1:
                 Fragment_B fragment_b = new Fragment_B();
                 return fragment_b;
+            case 2:
+                Fragment_C fragment_c = new Fragment_C();
+                return fragment_c;
+
 
             default:
                 return null;
