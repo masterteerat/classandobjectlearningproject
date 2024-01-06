@@ -19,7 +19,11 @@ public class Fragment_A extends Fragment {
     protected RecyclerView mRecyclerView;
     protected CustomAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected LinearLayoutManager mCurrentLayoutManagerType;
+    protected LayoutManagerType mCurrentLayoutManagerType;
+
+    private enum LayoutManagerType {
+        LINEAR_LAYOUT_MANAGER
+    }
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,16 +59,53 @@ public class Fragment_A extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        initDataset();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_a, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_a, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        if (savedInstanceState != null) {
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
+                    .getSerializable("layoutManager");
+        }
+
+        int scrollPosition = 0;
+        if (mRecyclerView.getLayoutManager() != null) {
+            scrollPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager())
+                    .findFirstCompletelyVisibleItemPosition();
+        }
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.scrollToPosition(scrollPosition);
+        mAdapter = new CustomAdapter(mDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        return rootView;
     }
+
+    private void initDataset() {
+        mDataset = new DataProductLine[9];
+
+        mDataset[0] = new DataProductLine("0000", R.drawable.pd_coke, "โค้ก + น้ำเเข็ง", 1, 25.0, 0.0, "enqueue");
+        mDataset[1] = new DataProductLine("0001", R.drawable.pd_coffee, "กาเเฟเย็นปั่น", 1, 35.0, 0.0, "enqueue");
+        mDataset[2] = new DataProductLine("0002", R.drawable.pd_coffee2, "กาเเฟเย็น", 1, 30.0, 0.0, "enqueue");
+        mDataset[3] = new DataProductLine("0003", R.drawable.pd_bluebery, "บลูเบอร์รีปั่น", 1, 35.0, 0.0, "enqueue");
+        mDataset[4] = new DataProductLine("0004", R.drawable.pd_banana, "กล้วยปั่น", 1, 30.0, 0.0, "enqueue");
+        mDataset[5] = new DataProductLine("0005", R.drawable.pd_greentea, "ชาเขียวเย็น", 1, 35.0, 0.0, "enqueue");
+        mDataset[6] = new DataProductLine("0006", R.drawable.pd_lemonjuice, "น้ำมะนาวเย็น", 1, 30.0, 0.0, "enqueue");
+        mDataset[7] = new DataProductLine("0007", R.drawable.pd_melon, "น้ำเมล่อน", 1, 40.0, 0.0, "enqueue");
+        mDataset[8] = new DataProductLine("0008", R.drawable.pd_watermelon, "น้ำเเตงโม", 1, 35.0, 0.0, "enqueue");
+
+    }
+
 }

@@ -1,31 +1,63 @@
 package com.example.classmanagementv2;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
+    private static final String TAG = "CustomAdapter";
     private DataProductLine[] localDataSet;
+    Context mContext;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+    public void upDateDataChange() {
+        notifyDataSetChanged();
+    }
 
-        public ViewHolder(View view) {
-            super(view);
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView txtDesc;
+        private final TextView txtPrice;
+        private final ImageView imgProdPic;
+        private final ImageButton imgbtnAdd;
 
-            textView = (TextView) view.findViewById(R.id.txt);
+
+        public ViewHolder(View v) {
+            super(v);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    upDateDataChange();
+                }
+            });
+            txtDesc = (TextView) v.findViewById(R.id.txtDesc);
+            txtPrice = (TextView) v.findViewById(R.id.txtPrice);
+            imgProdPic = (ImageView) v.findViewById(R.id.imgProd);
+            imgbtnAdd = (ImageButton) v.findViewById(R.id.btnAdd);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getTxtDesc() {
+            return txtDesc;
         }
+        public TextView getTxtPrice() {
+            return txtPrice;
+        }
+        public ImageView getImgProdPic() {
+            return imgProdPic;
+        }
+        public ImageButton getImgBtnAdd() {return imgbtnAdd;}
     }
 
 
     public CustomAdapter(DataProductLine[] dataSet) {
+        super();
+        this.mContext = GlobalVar.mainActivityContext;
         localDataSet = dataSet;
     }
 
@@ -40,8 +72,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        Log.d(TAG, "Element " + position + " set.");
 
-        viewHolder.getTextView().setText(localDataSet[position]);
+        viewHolder.getTxtDesc().setText(localDataSet[position].description);
+        viewHolder.getTxtPrice().setText("ราคา: " + localDataSet[position].price.toString() + " บาท");
+        viewHolder.getImgProdPic().setImageResource(localDataSet[position].imgResId);
+
     }
 
     @Override
